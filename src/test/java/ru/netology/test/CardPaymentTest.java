@@ -27,7 +27,7 @@ public class CardPaymentTest {
 
     @BeforeEach
     void setup() {
-        open("http:// 185.119.57.126:8080");
+        open("http://185.119.57.126:8080");
     }
 
     @BeforeEach
