@@ -26,7 +26,7 @@ public class CreditCardTest {
 
     @BeforeEach
     void setup() {
-        open("http://localhost:8080");
+        open("http:// 185.119.57.126:8080");
     }
 
     @BeforeEach
