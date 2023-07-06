@@ -20,26 +20,26 @@
 Приложение в собственной СУБД должно сохранять информацию о том, успешно ли был совершён платёж и каким способом. Данные карт при этом сохранять не допускается.
 
 ### Запуск тестов
-1) Клонировать репозиторий командой git clone git@github.com:TatianaSm77/Diploma.git
+1) Клонировать репозиторий командой `git clone git@github.com:TatianaSm77/Diploma.git`
 2) Открыть проект в IntelliJ IDEA;
-3) Запустить MySQL, PostgreSQL, NodeJS через терминал командой: docker-compose up.
+3) Запустить MySQL, PostgreSQL, NodeJS через терминал командой: `docker-compose up`.
 #### Для проверки MySQL:
-1) В новой вкладке терминала запустить тестируемое приложение командой: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar;
+1) В новой вкладке терминала запустить тестируемое приложение командой: `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`;
 
-2) Убедиться в готовности системы. Приложение должно быть доступно по адресу: http://localhost:8080/;
+2) Убедиться в готовности системы. Приложение должно быть доступно по адресу: `http://localhost:8080/`;
 
-3) В новой вкладке терминала запустить тесты командой: .\gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app" ;
+3) В новой вкладке терминала запустить тесты командой: `.\gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"` ;
 
-4) Для создания отчета запустить команду:./gradlew allureServe.
+4) Для создания отчета запустить команду:`./gradlew allureServe`.
 
 #### Для проверки PostgreSQL:
-1) В новой вкладке терминала запустить тестируемое приложение командой: java " java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar;
+1) В новой вкладке терминала запустить тестируемое приложение командой: `java " java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar`;
 
-2) Убедиться в готовности системы. Приложение должно быть доступно по адресу: http://localhost:8080/;
+2) Убедиться в готовности системы. Приложение должно быть доступно по адресу: `http://localhost:8080/`;
 
-3) В новой вкладке терминала запустить тесты командой: .\gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"  ;
+3) В новой вкладке терминала запустить тесты командой: `.\gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"`  ;
 
-4) Для создания отчета запустить команду: ./gradlew allureServe.
+4) Для создания отчета запустить команду: `./gradlew allureServe`.
 
- - Для остановки приложений использовать команду Cntrl C.
-- Для удаления контейнеров использовать команду docker-compose down
+ - Для остановки приложений использовать команду `Cntrl C`.
+- Для удаления контейнеров использовать команду `docker-compose down`
