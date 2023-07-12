@@ -37,7 +37,7 @@
 8) Открыть проект в IntelliJ IDEA;
 
 #### Для проверки MySQL:
-1) Запустить jar-файл с базой данных MySQL командой: java "-Dspring.datasource.url=jdbc:mysql://185.119.57.126:3306/app" -jar artifacts/aqa-shop.jar;
+1) Запустить jar-файл с базой данных MySQL командой: `java "-Dspring.datasource.url=jdbc:mysql://185.119.57.126:3306/app" -jar artifacts/aqa-shop.jar`;
 
 2) Убедиться в готовности системы. Приложение должно быть доступно по адресу: `http://localhost:8080/`;
 
