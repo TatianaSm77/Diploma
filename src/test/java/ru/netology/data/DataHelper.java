@@ -1,7 +1,8 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -9,121 +10,187 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class DataHelper {
+
     private DataHelper() {
     }
 
-    public static String getApprovedCardNumber() {
-        return "4444444444444441";
+    private static Faker faker = new Faker(new Locale("en"));
+    private static Faker fakerCyrillic = new Faker(new Locale("ru"));
+
+
+    public static String approvedCard() {
+        return "4444 4444 4444 4441";
     }
 
-    public static String getDeclinedCardNumber() {
-        return "4444444444444442";
+    public static String declinedCard() {
+        return "4444 4444 4444 4442";
     }
 
-    public static String getInvalidCardNumber() {
-        return "111111";
+    public static CardInfo getValidApprovedCard() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getCurrentMonth() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
+    public static CardInfo getValidDeclinedCard() {
+        return new CardInfo("4444 4444 4444 4442", generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getLastMonth() {
-        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+    public static CardInfo getInvalidCardWith15Digits() {
+        return new CardInfo(generateNumberWith15Digits(), generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getCurrentYear() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
+    public static CardInfo getInvalidCardWith17Digits() {
+        return new CardInfo(generateNumberWith17Digits(), generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getNextYear() {
-        return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    public static CardInfo getInvalidCardWith16RandomDigits() {
+        return new CardInfo(generateNumberWith16RandomDigits(), generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getLastYear() {
-        return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    public static CardInfo getInvalidCardWithLettersInNumber() {
+        return new CardInfo(generateNumberWithLetters(), generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getName() {
-        return faker.name().firstName() + " " + faker.name().lastName();
+    public static CardInfo getInvalidCardWith00Month() {
+        return new CardInfo("4444 4444 4444 4441", "00", generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    public static String getCVC() {
-        return Integer.toString(faker.number().numberBetween(100, 999));
+    public static CardInfo getInvalidCardWith13thMonth() {
+        return new CardInfo("4444 4444 4444 4441", "13", generateYear(1),
+                generateValidHolder(), generateValidCVC());
     }
 
-    static Faker faker = new Faker(new Locale("en"));
+    public static CardInfo getValidCardWithCurrentMonthAndCurrentYear() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(0), generateYear(0),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCardWithExpiredMonth() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(-1), generateYear(0),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getValidCardWithPlus4YearsFromCurrent() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(0), generateYear(4),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getValidCardWithPlus5YearsFromCurrent() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(0), generateYear(5),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getCardWithPlus6YearsFromCurrent() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(0), generateYear(6),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCardWithExpiredYear() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(0), generateYear(-1),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCardWithCyrillicName() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateInvalidHolderInCyrillic(), generateValidCVC());
+    }
+
+    public static CardInfo getValidCardWithHyphenatedName() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateValidHolderWithHyphenatedName(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCardWithDigitsInName() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateInvalidHolderWithDigits(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCardWithSpecialSymbolsInName() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateInvalidHolderWithSymbols(), generateValidCVC());
+    }
+
+    public static CardInfo getInvalidCVCWith2Digits() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateValidHolder(), generateInvalidCVCWith2Digits());
+    }
+
+    public static CardInfo getInvalidCVCWithLetters() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateValidHolder(), generateInvalidCVCWithLetters());
+    }
+
+    public static String generateNumberWith15Digits() {
+        return faker.numerify("#### #### #### ###");
+    }
+
+    public static String generateNumberWith17Digits() {
+        return faker.numerify("#### #### #### #### #");
+    }
+
+    public static String generateNumberWith16RandomDigits() {
+        return faker.numerify("#### #### #### ####");
+    }
+
+    public static String generateNumberWithLetters() {
+        return faker.numerify("AB## #### #### ####");
+    }
+
+    public static String generateMonth(int addMonths) {
+        return LocalDate.now().plusMonths(addMonths).format(DateTimeFormatter.ofPattern("MM"));
+    }
+
+    public static String generateYear(int addYears) {
+        return LocalDate.now().plusYears(addYears).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    public static String generateValidHolder() {
+        return faker.name().fullName().toUpperCase();
+    }
+
+    public static String generateValidHolderWithHyphenatedName() {
+        return faker.name().firstName().toUpperCase() + " " + faker.name().lastName().toUpperCase() + "-"
+                + faker.name().lastName().toUpperCase();
+    }
+
+    public static String generateInvalidHolderInCyrillic() {
+        return fakerCyrillic.name().firstName().toUpperCase() + " " + fakerCyrillic.name().lastName().toUpperCase();
+    }
+
+    public static String generateInvalidHolderWithDigits() {
+        return faker.name().firstName() + faker.numerify("#") + " " + faker.name().lastName().toUpperCase();
+    }
+
+    public static String generateInvalidHolderWithSymbols() {
+        return faker.name().firstName() + "$" + faker.name().lastName().toUpperCase();
+    }
+
+    public static String generateValidCVC() {
+        return faker.numerify("###");
+    }
+
+    public static String generateInvalidCVCWith2Digits() {
+        return faker.numerify("##");
+    }
+
+    public static String generateInvalidCVCWithLetters() {
+        return faker.numerify("ab#");
+    }
 
     @Value
+    @Setter
     public static class CardInfo {
-        private String cardNumber;
-        private String month;
-        private String year;
-        private String name;
-        private String cvc;
+        String number;
+        String month;
+        String year;
+        String holder;
+        String cvc;
     }
 
-    public static CardInfo getCardInfoValidValues() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoCardNumberDeclined() {
-        return new CardInfo(getDeclinedCardNumber(), getCurrentMonth(), getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoCardNumberNull() {
-        return new CardInfo("0000000000000000", getCurrentMonth(), getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoCardNumberEmpty() {
-        return new CardInfo(" ", getCurrentMonth(), getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoCardNumberLess() {
-        return new CardInfo(getInvalidCardNumber(), getCurrentMonth(), getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoMonthEmpty() {
-        return new CardInfo(getApprovedCardNumber(), " ", getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoMonthNull() {
-        return new CardInfo(getApprovedCardNumber(), "00", getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoMonthMore() {
-        return new CardInfo(getApprovedCardNumber(), "13", getNextYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoExpiredLastMonth() {
-        return new CardInfo(getApprovedCardNumber(), getLastMonth(), getLastYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoYearEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), " ", getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoExpiredLastYear() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getLastYear(), getName(), getCVC());
-    }
-
-    public static CardInfo getCardInfoOwnerEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), " ", getCVC());
-    }
-
-    public static CardInfo getCardInfoCyrillicName() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), "Иван Петров", getCVC());
-    }
-
-    public static CardInfo getCardInfoSymbolName() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), "123456%)", getCVC());
-    }
-
-    public static CardInfo getCardInfoCVCEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), getName(), " ");
-    }
-
-    public static CardInfo getCardInfoCVCNull() {
-        return new CardInfo(getApprovedCardNumber(), getCurrentMonth(), getNextYear(), getName(), "000");
-    }
 }

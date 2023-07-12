@@ -1,51 +1,87 @@
 package ru.netology.data;
 
-import lombok.SneakyThrows;
+import lombok.*;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SQLHelper {
+
     private static QueryRunner runner = new QueryRunner();
 
-    private static Connection getConn() throws SQLException {
-        return DriverManager.getConnection(
-                System.getProperty("db.url"),
-                System.getProperty("db.user"),
-                System.getProperty("db.password")
-        );
+    private static String url = System.getProperty("dbUrl");
+    private static String username = System.getProperty("dbUsername");
+    private static String password = System.getProperty("dbPassword");
+
+    @SneakyThrows
+    private static Connection getConn() {
+        return DriverManager.getConnection(url, username, password);
     }
 
     @SneakyThrows
-    public static void cleanDataBase() {
+    public static String getPaymentStatus() {
+        Connection conn = getConn();
+        var SQLQuery = "SELECT status FROM payment_entity ORDER BY created DESC";
+        return runner.query(conn, SQLQuery, new ScalarHandler<String>());
+    }
+
+    @SneakyThrows
+    public static void assertPaymentStatus(String status) {
+        assertEquals(status, getPaymentStatus());
+    }
+
+    @SneakyThrows
+    public static String getCreditStatus() {
+        Connection conn = getConn();
+        var SQLQuery = "SELECT status FROM credit_request_entity ORDER BY created DESC";
+        return runner.query(conn, SQLQuery, new ScalarHandler<String>());
+    }
+
+    @SneakyThrows
+    public static void assertCreditStatus(String status) {
+        assertEquals(status, getCreditStatus());
+    }
+
+    @SneakyThrows
+    public static void cleanDatabase() {
         var connection = getConn();
-        runner.execute(connection, "DELETE FROM payment_entity");
         runner.execute(connection, "DELETE FROM credit_request_entity");
+        runner.execute(connection, "DELETE FROM payment_entity");
         runner.execute(connection, "DELETE FROM order_entity");
     }
 
-    public static String getStatusCardPayment() {
-        var statusSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
-        try (var conn = getConn()) {
-            var status = runner.query(conn, statusSQL, new ScalarHandler<String>());
-            return new String(status);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PaymentEntity {
+        private String id;
+        private String amount;
+        private String created;
+        private String status;
+        private String transaction_id;
     }
 
-    public static String getStatusCreditCard() {
-        var statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
-        try (var conn = getConn()) {
-            var status = runner.query(conn, statusSQL, new ScalarHandler<String>());
-            return new String(status);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CreditRequestEntity {
+        private String id;
+        private String bank_id;
+        private String created;
+        private String status;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class OrderEntity {
+        private String id;
+        private String created;
+        private String credit_id;
+        private String payment_id;
     }
 }
