@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id "io.freefair.lombok" version "5.3.0"
-    id 'io.qameta.allure' version '2.9.6'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 group 'ru.netology'
@@ -12,9 +12,9 @@ compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
 allure {
-    version = '2.16.1'
+    version = '2.20.1'
     useJUnit5 {
-        version = '2.16.1'
+        version = '2.20.1'
     }
 }
 
@@ -32,13 +32,14 @@ dependencies {
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testCompileOnly 'org.projectlombok:lombok:1.18.12'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
-    implementation 'io.qameta.allure:allure-selenide:2.16.1'
+    implementation 'io.qameta.allure:allure-selenide:2.20.1'
 }
 
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    systemProperty 'dbUrl', System.getProperty('dbUrl', 'jdbc:mysql://localhost:3306/app')
+    systemProperty 'dbUrl', System.getProperty('dbUrl', 'jdbc:mysql://185.119.57.126:3306/app')
     systemProperty 'dbUsername', System.getProperty('dbUsername', 'app')
     systemProperty 'dbPassword', System.getProperty('dbPassword', 'pass')
 }
+
