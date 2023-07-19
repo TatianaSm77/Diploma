@@ -49,25 +49,6 @@ public class FormPage {
         continueButton.click();
     }
 
-    public void setEmptyValue(DataHelper.CardInfo info, String empty) {
-        if (!empty.equals("number")) {
-            numberField.setValue(info.getNumber());
-        }
-        if (!empty.equals("monthField")) {
-            monthField.setValue(info.getMonth());
-        }
-        if (!empty.equals("yearField")) {
-            yearField.setValue(info.getYear());
-        }
-        if (!empty.equals("holderField")) {
-            holderField.setValue(info.getHolder());
-        }
-        if (!empty.equals("cvcField")) {
-            cvcField.setValue(info.getCvc());
-        }
-        continueButton.click();
-    }
-
     public void checkSuccessNotification() {
         successNotification.shouldBe(visible, Duration.ofSeconds(20));
     }

@@ -42,6 +42,23 @@ public class DataHelper {
                 generateValidHolder(), generateValidCVC());
     }
 
+    public static CardInfo getCardInfoCardMonthEmpty() {
+        return new CardInfo("4444 4444 4444 4441", "", generateYear(1),
+                generateValidHolder(), generateValidCVC());
+    }
+    public static CardInfo getCardInfoCardYearEmpty() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), "",
+                generateValidHolder(), generateValidCVC());
+    }
+    public static CardInfo getCardInfoCardHolderEmpty() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                "", generateValidCVC());
+    }
+    public static CardInfo getCardInfoCardCVCEmpty() {
+        return new CardInfo("4444 4444 4444 4441", generateMonth(3), generateYear(1),
+                generateValidHolder(), "");
+    }
+
     public static CardInfo getInvalidCardWith15Digits() {
         return new CardInfo(generateNumberWith15Digits(), generateMonth(3), generateYear(1),
                 generateValidHolder(), generateValidCVC());

@@ -94,12 +94,12 @@ public class CreditTest {
         SQLHelper.expectedCreditStatus("APPROVED");
     }
 
-    @Test
-    void shouldGetErrorNotifyIfEmptyNumber() {
+        @Test
+        void shouldGetErrorNotifyIfEmptyNumber() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardNumberEmpty();
         var formPage = mainPage.openCreditForm();
-        formPage.setEmptyValue(cardInfo, "number");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyNumber();
     }
 
@@ -143,9 +143,9 @@ public class CreditTest {
     @Test
     void shouldGetErrorNotifyIfEmptyMonth() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardMonthEmpty();
         var formPage = mainPage.openCreditForm();
-        formPage.setEmptyValue(cardInfo, "monthField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyMonth();
     }
 
@@ -179,9 +179,9 @@ public class CreditTest {
     @Test
     void shouldGetErrorNotifyIfEmptyYear() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardYearEmpty();
         var formPage = mainPage.openCreditForm();
-        formPage.setEmptyValue(cardInfo, "yearField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyYear();
     }
 
@@ -206,9 +206,9 @@ public class CreditTest {
     @Test
     void shouldGetErrorNotifyIfEmptyHolder() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardHolderEmpty();
         var formPage = mainPage.openCreditForm();
-        formPage.setEmptyValue(cardInfo, "holderField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyHolder();
     }
 
@@ -242,9 +242,9 @@ public class CreditTest {
     @Test
     void shouldGetErrorNotifyIfEmptyCVC() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardCVCEmpty();
         var formPage = mainPage.openCreditForm();
-        formPage.setEmptyValue(cardInfo, "cvcField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyCVC();
     }
 

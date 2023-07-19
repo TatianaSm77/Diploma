@@ -99,9 +99,9 @@ public class PaymentTest {
     @Test
     void shouldGetErrorNotifyIfEmptyNumber() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardNumberEmpty();
         var formPage = mainPage.openPaymentForm();
-        formPage.setEmptyValue(cardInfo, "number");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyNumber();
     }
 
@@ -144,9 +144,9 @@ public class PaymentTest {
     @Test
     void shouldGetErrorNotifyIfEmptyMonth() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardMonthEmpty();
         var formPage = mainPage.openPaymentForm();
-        formPage.setEmptyValue(cardInfo, "monthField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyMonth();
     }
 
@@ -180,9 +180,9 @@ public class PaymentTest {
     @Test
     void shouldGetErrorNotifyIfEmptyYear() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardYearEmpty();
         var formPage = mainPage.openPaymentForm();
-        formPage.setEmptyValue(cardInfo, "yearField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyYear();
     }
 
@@ -207,9 +207,9 @@ public class PaymentTest {
     @Test
     void shouldGetErrorNotifyIfEmptyHolder() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardHolderEmpty();
         var formPage = mainPage.openPaymentForm();
-        formPage.setEmptyValue(cardInfo, "holderField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyHolder();
     }
 
@@ -243,9 +243,9 @@ public class PaymentTest {
     @Test
     void shouldGetErrorNotifyIfEmptyCVC() {
         var mainPage = new MainPage();
-        var cardInfo = DataHelper.getValidApprovedCard();
+        var cardInfo = DataHelper.getCardInfoCardCVCEmpty();
         var formPage = mainPage.openPaymentForm();
-        formPage.setEmptyValue(cardInfo, "cvcField");
+        formPage.setValues(cardInfo);
         formPage.checkErrorNotifyIfEmptyCVC();
     }
 
