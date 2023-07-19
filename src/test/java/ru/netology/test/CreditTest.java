@@ -26,7 +26,7 @@ public class CreditTest {
     @BeforeEach
     public void setUp() {
         Configuration.holdBrowserOpen = true;
-        open("http://185.119.57.126:8080");
+        open("http://localhost:8080");
     }
 
     @AfterEach
@@ -41,7 +41,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertCreditStatus("APPROVED");
+        SQLHelper.expectedCreditStatus("APPROVED");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkErrorNotification();
-        SQLHelper.assertCreditStatus("DECLINED");
+        SQLHelper.expectedCreditStatus("DECLINED");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertCreditStatus("APPROVED");
+        SQLHelper.expectedCreditStatus("APPROVED");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertCreditStatus("APPROVED");
+        SQLHelper.expectedCreditStatus("APPROVED");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertCreditStatus("APPROVED");
+        SQLHelper.expectedCreditStatus("APPROVED");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class CreditTest {
         var formPage = mainPage.openCreditForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertCreditStatus("APPROVED");
+        SQLHelper.expectedCreditStatus("APPROVED");
     }
 
     @Test

@@ -28,7 +28,7 @@ public class PaymentTest {
     @BeforeEach
     public void setUp() {
         Configuration.holdBrowserOpen = true;
-        open("http://185.119.57.126:8080");
+        open("http://localhost:8080");
     }
 
     @AfterEach
@@ -43,7 +43,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertPaymentStatus("APPROVED");;
+        SQLHelper.expectedPaymentStatus("APPROVED");;
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkErrorNotification();
-        SQLHelper.assertPaymentStatus("DECLINED");
+        SQLHelper.expectedPaymentStatus("DECLINED");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertPaymentStatus("APPROVED");
+        SQLHelper.expectedPaymentStatus("APPROVED");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertPaymentStatus("APPROVED");
+        SQLHelper.expectedPaymentStatus("APPROVED");
     }
 
     @Test
@@ -83,7 +83,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertPaymentStatus("APPROVED");
+        SQLHelper.expectedPaymentStatus("APPROVED");
     }
 
     @Test
@@ -93,7 +93,7 @@ public class PaymentTest {
         var formPage = mainPage.openPaymentForm();
         formPage.setValues(cardInfo);
         formPage.checkSuccessNotification();
-        SQLHelper.assertPaymentStatus("APPROVED");
+        SQLHelper.expectedPaymentStatus("APPROVED");
     }
 
     @Test

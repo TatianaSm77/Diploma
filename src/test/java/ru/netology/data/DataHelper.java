@@ -11,6 +11,7 @@ import java.util.Locale;
 
 public class DataHelper {
 
+
     private DataHelper() {
     }
 
@@ -33,6 +34,11 @@ public class DataHelper {
 
     public static CardInfo getValidDeclinedCard() {
         return new CardInfo("4444 4444 4444 4442", generateMonth(3), generateYear(1),
+                generateValidHolder(), generateValidCVC());
+    }
+
+    public static CardInfo getCardInfoCardNumberEmpty() {
+        return new CardInfo(" ", generateMonth(3), generateYear(1),
                 generateValidHolder(), generateValidCVC());
     }
 
@@ -185,7 +191,7 @@ public class DataHelper {
 
     @Value
     @Setter
-    public static class CardInfo {
+   public static class CardInfo {
         String number;
         String month;
         String year;

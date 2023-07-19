@@ -29,8 +29,8 @@ public class SQLHelper {
         return runner.query(conn, SQLQuery, new ScalarHandler<String>());
     }
 
-    @SneakyThrows
-    public static void assertPaymentStatus(String status) {
+
+    public static void expectedPaymentStatus(String status) {
         assertEquals(status, getPaymentStatus());
     }
 
@@ -41,8 +41,8 @@ public class SQLHelper {
         return runner.query(conn, SQLQuery, new ScalarHandler<String>());
     }
 
-    @SneakyThrows
-    public static void assertCreditStatus(String status) {
+
+    public static void expectedCreditStatus(String status) {
         assertEquals(status, getCreditStatus());
     }
 
@@ -75,13 +75,4 @@ public class SQLHelper {
         private String status;
     }
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class OrderEntity {
-        private String id;
-        private String created;
-        private String credit_id;
-        private String payment_id;
-    }
 }

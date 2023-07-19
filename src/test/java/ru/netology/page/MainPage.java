@@ -12,7 +12,6 @@ public class MainPage {
     private SelenideElement formBody = $("form");
 
     public MainPage() {
-        paymentButton.closest("span").find(".input__sub");
         paymentButton.shouldBe(Condition.visible);
         creditButton.shouldBe(Condition.visible);
         formHead.shouldBe(Condition.hidden);

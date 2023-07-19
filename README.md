@@ -27,14 +27,10 @@
 4) Установить [Docker Desktop](https://www.docker.com/).
 
 ### Запуск тестов 
-1) Открыть программу PuTTY;
-2) В окне "Host Name (or IP address)" ввести адрес 185.119.57.126, нажать кнопку Open;
-3) В появившемся окне ввести логин/пароль (student/KOPSYO);
-4) Клонировать репозиторий командой `git clone https://github.com/TatianaSm77/Diploma`
-5) Перейти в папку командой `cd Diploma`;
-6) Создать контейнеры в скопированном проекте `docker-compose up -d`;
-7) Запустить контейнеры командой `docker-compose start`;
-8) Открыть проект в IntelliJ IDEA;
+1) Клонировать репозиторий командой `git clone https://github.com/TatianaSm77/Diploma`
+2) Открыть проект в IntelliJ IDEA;
+3) Создать контейнеры в скопированном проекте `docker-compose up -d`;
+
 
 #### Для проверки MySQL:
 1) Запустить jar-файл с базой данных MySQL командой: `java "-Dspring.datasource.url=jdbc:mysql://185.119.57.126:3306/app" -jar artifacts/aqa-shop.jar`;
