@@ -2,7 +2,7 @@
 
 - [План тестирования](https://github.com/TatianaSm77/Diploma/blob/main/Doc/Plan.md)
 
-- [Отчётные документы по итогам тестирования]
+- [Отчётные документы по итогам тестирования](https://github.com/TatianaSm77/Diploma/blob/main/Doc/Report.md)
 - [Отчётные документы по итогам автоматизации]
 
 ## Описание приложения

@@ -24,9 +24,9 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        Connection conn = getConn();
+        var connection = getConn();
         var SQLQuery = "SELECT status FROM payment_entity ORDER BY created DESC";
-        return runner.query(conn, SQLQuery, new ScalarHandler<String>());
+        return runner.query(connection, SQLQuery, new ScalarHandler<String>());
     }
 
 
@@ -36,9 +36,9 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getCreditStatus() {
-        Connection conn = getConn();
+        var connection = getConn();
         var SQLQuery = "SELECT status FROM credit_request_entity ORDER BY created DESC";
-        return runner.query(conn, SQLQuery, new ScalarHandler<String>());
+        return runner.query(connection, SQLQuery, new ScalarHandler<String>());
     }
 
 
@@ -53,26 +53,4 @@ public class SQLHelper {
         runner.execute(connection, "DELETE FROM payment_entity");
         runner.execute(connection, "DELETE FROM order_entity");
     }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class PaymentEntity {
-        private String id;
-        private String amount;
-        private String created;
-        private String status;
-        private String transaction_id;
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class CreditRequestEntity {
-        private String id;
-        private String bank_id;
-        private String created;
-        private String status;
-    }
-
 }
